@@ -34,8 +34,8 @@
                         <td>
                             <select id="estado" name="cmbEstado" required>
                                 <option value="0">Seleccionar</option>
-                                <option value="1">Soltero</option>
-                                <option value="2">Casado</option>
+                                <option value="2">Soltero</option>
+                                <option value="1">Casado</option>
                                 <option value="3">Divorciado</option>
                                 <option value="4">Viudo</option>
                             </select>

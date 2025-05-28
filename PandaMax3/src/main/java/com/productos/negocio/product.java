@@ -2,10 +2,33 @@ package com.productos.negocio;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.productos.datos.Conexion;
 
 public class product {
+	
+	public int numID() {
+	    int Ids = 0;
+	    String sentencia = "SELECT id_pr FROM tb_producto ORDER BY id_pr DESC LIMIT 1;\r\n"
+	    		+ "";
+
+	    try {
+	        ResultSet rs;
+	        Conexion con = new Conexion();
+	        rs = con.Consulta(sentencia);
+	        if (rs.next()) {
+	            Ids = rs.getInt(1)+1; // ✅ Aquí obtienes el valor de count(*)
+	        }
+	        rs.close();
+	    } catch (NumberFormatException e) {
+	        e.printStackTrace();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return Ids;
+	}
 	
 	
 	public String consultarTodo()
@@ -79,8 +102,12 @@ public class product {
 		      tabla+="<td>"+rs.getString(3)+"</td>";
 		      tabla+="<td>"+rs.getInt(4)+"</td>";
 		      tabla+="<td>"+rs.getDouble(5)+"</td>";
-		      tabla+="<td><a href='actualizar.jsp?id="+rs.getInt(1)+"'>Actualizar</a></td>";
-		      tabla+="<td><a href='eliminar.jsp?id="+rs.getInt(1)+"'>Eliminar</a></td></tr>";
+		      tabla+="<td><a href='actualizar.jsp?id="+rs.getInt(1)+"'>" +
+	                   "<img src='iconos/editar.png' alt='Actualizar' style='width: 30px; height: 30px;' />" +
+	                   "</a></td>";
+	            tabla+="<td><a href='productoCRUD.jsp?accion=eliminar&id="+rs.getInt(1)+"'>" +
+	                   "<img src='iconos/eliminar.png' alt='Eliminar' style='width: 30px; height: 30px;' />" +
+	                   "</a></td>";
 		    }
 		    tabla+="</tbody></table>";
 		  } catch (SQLException e) {
@@ -90,9 +117,58 @@ public class product {
 		  return tabla;
 		}
 	
+	public String buscarProductoId(String id) {
+		String sentencia="Select nombre_pr ,precio_pr from tb_producto where id_pr="+id;
+		Conexion con=new Conexion();
+		ResultSet rs=null;
+		String resultado ="<table class=table table=info>";
+		
+		try {
+			rs=con.Consulta(sentencia);
+			while(rs.next()) {
+				resultado+="<tr><td>"+rs.getString(1)+"</td>"
+						+ "<td>"+rs.getDouble(2)+"</td></tr>";
+			}
+			resultado+="</table>";
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return resultado;
+	}
 	
 	
+	public String eliminarProducto(String id) {
+		String sql="delete from tb_producto where id_pr="+id;
+		Conexion con=new Conexion();
+		String msg=con.Ejecutar(sql);
+		return msg;
+	}
+	
+	public String insertarProducto(String sql) {
+	    Conexion con = new Conexion();
+	    String resultado = con.Ejecutar(sql);
+	    return resultado;
+	}
+	
+	public String actualizarProducto(String sql) {
+	    Conexion con = new Conexion();
+	    String resultado = "";
+	    try {
+	        Statement st = con.getConexion().createStatement();
+	        int filas = st.executeUpdate(sql);
+	        if (filas > 0) {
+	            resultado = "Producto actualizado correctamente.";
+	        } else {
+	            resultado = "No se pudo actualizar el producto.";
+	        }
+	        st.close();
+	    } catch (Exception e) {
+	        resultado = "Error al actualizar: " + e.getMessage();
+	    }
+	    return resultado;
+	}
 
-	
+
 	
 }

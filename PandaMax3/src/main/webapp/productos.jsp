@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Administracion de Productos</title>
 <link rel="stylesheet" href="css/c1.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <header>
     	<a href="index.jsp"><img alt="Logo" src="iconos/logo.png" class="logo"></a>
@@ -15,10 +16,17 @@
         <p>Tu centro de soluciones técnicas</p>
     	<button id="toggle-theme">Cambiar Tema</button>
     </header>
+    <nav>
+        <ul>
+        	<li><a href="menu.jsp">Regresar</a></li>
+            <li><a href="cerrarSesion.jsp">Cerrar Sesion</a></li>  
+        </ul>
+    </nav>
 <main>
         <div class="container">
         <h2 class="mt-4">Ingresar Productos</h2>
-        <form>
+        <form method="post" action="productoCRUD.jsp">
+        	<input type="hidden" name="accion" value="insertar">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
@@ -36,27 +44,12 @@
             
             <div class="mb-3">
                 <label for="cantidad" class="form-label">Cantidad</label>
-                <select class="form-select" id="cantidad" name="cantidad">
-                    <option selected>Seleccione cantidad</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <input type="number" name="cantidad_pr" >
             </div>
             
             <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
                 <input type="text" class="form-control" id="precio" name="precio" placeholder="Ingrese el precio">
-            </div>
-            
-            <div class="mb-3">
-                <label for="foto" class="form-label">Foto</label>
-                <div class="input-group">
-                    <input type="file" class="form-control" id="foto" name="foto">
-                    <button class="btn btn-outline-secondary" type="button">Subir</button>
-                </div>
             </div>
             
             <div class="mb-3">

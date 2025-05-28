@@ -79,7 +79,7 @@ public class usuario {
 	
 	public int numID() {
 	    int Ids = 0;
-	    String sentencia = "select count(*) from tb_usuario;";
+	    String sentencia = "SELECT id_us FROM tb_usuario ORDER BY id_us DESC LIMIT 1;";
 
 	    try {
 	        ResultSet rs;
@@ -109,11 +109,16 @@ public class usuario {
 	        Conexion clsCon = new Conexion();
 	        rs = clsCon.Consulta(sentencia);
 	        if (rs.next()) {
+	            int estado = rs.getInt("estado"); // 🔒 validamos el estado
+	            if (estado == 0) {
+	                return null; // el usuario está bloqueado
+	            }
+
 	            u = new usuario();
 	            u.setCorreo(ncorreo);
 	            u.setClave(nclave);
-	            u.setPerfil(rs.getInt(2));
-	            u.setNombre(rs.getString(4));
+	            u.setPerfil(rs.getInt("id_per"));
+	            u.setNombre(rs.getString("nombre_us"));
 	        }
 	        rs.close();
 	    } catch (Exception ex) {
@@ -121,6 +126,7 @@ public class usuario {
 	    }
 	    return u;
 	}
+
 
 	
 	public String ingresarCliente()

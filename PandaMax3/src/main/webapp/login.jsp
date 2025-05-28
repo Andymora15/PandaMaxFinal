@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-import="com.productos.seguridad.*"%>
+import="com.productos.seguridad.*,java.sql.ResultSet"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@ import="com.productos.seguridad.*"%>
     <header>
         <img alt="Logo" src="iconos/logo.png" class="logo">
         <h1>PandaMax</h1>
-        <p>Tu centro de soluciones técnicas</p>
+        <p>Tu centro de soluciones tecnicas</p>
         <button id="toggle-theme">Cambiar Tema</button>
     </header>
 

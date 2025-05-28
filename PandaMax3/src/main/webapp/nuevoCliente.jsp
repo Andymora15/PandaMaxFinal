@@ -14,7 +14,11 @@ import="com.productos.seguridad.*"%>
         <p>Tu centro de soluciones técnicas</p>
         <button id="toggle-theme">Cambiar Tema</button>
     </header>
-
+	<nav>
+		<ul>
+		<li><a href="login.jsp">Regresar</a></li>	
+		</ul>
+	</nav>
     <main>
         <div id="content">
             <h2>Datos Registrados Exitosamente :)</h2>

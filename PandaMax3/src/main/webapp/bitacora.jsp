@@ -34,7 +34,8 @@
             java.sql.Date fecha = rs.getDate("fecha_aud");
             String usuarioAud = rs.getString("usuario_aud");
 
-            registros.add(new String[]{tabla, operacion, valorAnterior, valorNuevo, fecha.toString(), usuarioAud});
+            String fechaStr = (fecha != null) ? fecha.toString() : "Sin fecha";
+            registros.add(new String[]{tabla, operacion, valorAnterior, valorNuevo, fechaStr, usuarioAud});
         }
     } catch (SQLException e) {
         e.printStackTrace();

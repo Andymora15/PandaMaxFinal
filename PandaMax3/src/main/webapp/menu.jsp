@@ -25,8 +25,12 @@
     <link rel="stylesheet" href="css/c1.css">
 </head>
 <body>
-    <header>
-        <h1>Bienvenido <%= nombreUsuario %></h1>
+	<header>
+        <img alt="Logo" src="iconos/logo.png" class="logo">
+        <h1>PandaMax</h1>
+        <p>Tu centro de soluciones técnicas</p>
+        <button id="toggle-theme">Cambiar Tema</button>
+        <h2>Bienvenido <%= nombreUsuario %></h2>    
     </header>
 
     <nav>
@@ -55,6 +59,18 @@
         </div>
         <p>&copy; 2025 PandaMax Tech Repair - Todos los derechos reservados.</p>
     </footer>
+    <script>
+        const toggleBtn = document.getElementById("toggle-theme");
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("light-mode");
+
+            if (document.body.classList.contains("light-mode")) {
+                toggleBtn.textContent = "Modo Oscuro";
+            } else {
+                toggleBtn.textContent = "Modo Claro";
+            }
+        });
+    </script>
 </body>
 
 </html>

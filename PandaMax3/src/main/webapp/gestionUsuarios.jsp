@@ -34,8 +34,15 @@
     <title>Editar Usuario</title>
     <link rel="stylesheet" href="css/c1.css">
 </head>
+    <header>
+        <img alt="Logo" src="iconos/logo.png" class="logo">
+        <h1>PandaMax</h1>
+        <p>Tu centro de soluciones técnicas</p>
+        <button id="toggle-theme">Cambiar Tema</button>
+    </header>
 <body>
-    <h2>Editar Usuario</h2>
+<main>
+<h2>Editar Usuario</h2>
     <form action="actualizarUsuario.jsp" method="post">
         <input type="hidden" name="id_us" value="<%= idUsuario %>">
 
@@ -49,8 +56,10 @@
         <input type="email" name="correo_us" value="<%= correo %>" required><br>
 
         <label>Contraseña:</label><br>
-        <input type="password" name="clave_us" value="<%= clave %>" required><br>
-
+        <input type="password" id="clave" name="txtClave" required />
+        <!-- Checkbox para mostrar/ocultar la contraseña -->
+        <input type="checkbox" id="mostrarClave" onclick="togglePassword()"> Mostrar clave
+         <br>                   
         <label>Perfil:</label><br>
         <select name="id_per" required>
             <option value="1" <%= perfil == 1 ? "selected" : "" %>>Administrador</option>
@@ -69,5 +78,45 @@
         <input type="submit" value="Actualizar Usuario">
         <a href="usuarios.jsp">Cancelar</a>
     </form>
+</main>
+<footer>
+        <p>Síguenos en nuestras redes sociales</p>
+        <div class="social">
+            <a href="https://www.facebook.com/"><img src="iconos/facebook.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com/"><img src="iconos/instagram.png" alt="Instagram"></a>
+            <a href="https://www.tiktok.com/"><img src="iconos/tiktok.png" alt="TikTok"></a>
+        </div>
+        <p>&copy; 2025 PandaMax Tech Repair - Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        // Función para alternar entre mostrar y ocultar la contraseña
+        function togglePassword() {
+            var passwordField = document.getElementById("clave");
+            var showPassword = document.getElementById("mostrarClave");
+
+            if (showPassword.checked) {
+                passwordField.type = "text";  // Muestra la contraseña
+            } else {
+                passwordField.type = "password";  // Oculta la contraseña
+            }
+        }
+
+        // Función para validar que la clave tenga al menos 8 caracteres
+        function validarClave() {
+            var clave = document.getElementById("clave").value;
+
+            if (clave.length < 8) {
+                alert("La clave debe tener al menos 8 caracteres.");
+                return false;  // Evita el envío del formulario si la clave no es válida
+            }
+            return true;  // Permite el envío del formulario si la clave es válida
+        }
+
+        const toggleBtn = document.getElementById("toggle-theme");
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("light-mode");
+            toggleBtn.textContent = document.body.classList.contains("light-mode") ? "Modo Oscuro" : "Modo Claro";
+        });
+    </script>   
 </body>
 </html>
